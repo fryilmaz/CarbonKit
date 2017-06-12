@@ -181,7 +181,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithItems:(NSArray *)items
                       toolBar:(UIToolbar *)toolBar
-                 withCustomView:(UIView *)customView
+               withCustomView:(UIView *)customView
                      delegate:(id)target;
 
 /**
