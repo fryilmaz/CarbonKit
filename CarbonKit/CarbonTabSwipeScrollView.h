@@ -46,6 +46,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithItems:(nullable NSArray *)items;
 
 /**
+ *  Create CarbonTabScrollView with items and custom view. Items can be NSString or UIImage like
+ *  creating a SegmentedControl. ScrollView content size is equal to
+ *  SegmentedControl width + custom view width.
+ *
+ *  @param items Array of segment titles or images
+ *  @param customView
+ *  @return CarbonTabSwipeScrollView that contains CarbonTabSwipeSegmentedControl
+ */
+- (instancetype)initWithItems:(nullable NSArray *)items withCustomView:(UIView*)customView;
+
+/**
  *  Add items to CarbonTabScrollView. Items can be NSString or UIImage like
  *  creating a SegmentedControl. ScrollView content size is equal to
  *  SegmentedControl width.

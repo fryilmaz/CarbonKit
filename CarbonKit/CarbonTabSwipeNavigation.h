@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return UIViewController at index
  */
 - (nonnull UIViewController *)carbonTabSwipeNavigation:
-                                  (nonnull CarbonTabSwipeNavigation *)carbonTabSwipeNavigation
+(nonnull CarbonTabSwipeNavigation *)carbonTabSwipeNavigation
                                  viewControllerAtIndex:(NSUInteger)index;
 
 @optional
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return Toolbar position (UIBarPositionTop or UIBarPositionBottom)
  */
 - (UIBarPosition)barPositionForCarbonTabSwipeNavigation:
-    (nonnull CarbonTabSwipeNavigation *)carbonTabSwipeNavigation;
+(nonnull CarbonTabSwipeNavigation *)carbonTabSwipeNavigation;
 
 @end
 
@@ -98,6 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) NSUInteger currentTabIndex;
 @property(nonatomic) NSLayoutConstraint *toolbarHeight;
 @property(nonatomic, nonnull) UIToolbar *toolbar;
+@property(nonatomic, nonnull) UIView *customView;
 @property(nonatomic, nonnull) UIPageViewController *pageViewController;
 @property(nonatomic, nonnull) CarbonTabSwipeScrollView *carbonTabSwipeScrollView;
 @property(weak, nonatomic) UIScrollView *pagesScrollView;
@@ -167,6 +168,21 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithItems:(nullable NSArray *)items
                       toolBar:(nonnull UIToolbar *)toolBar
                      delegate:(nonnull id)target;
+
+/**
+ *  Create CarbonTabSwipeNavigation with items and customView
+ *
+ *  @param items Array of items
+ *  @param toolBar Tool bar for Menu
+ *  @param customView custom View for Menu Items
+ *  @param target Delegate target object
+ *
+ *  @return CarbonTabSwipeNavigation instance
+ */
+- (instancetype)initWithItems:(NSArray *)items
+                      toolBar:(UIToolbar *)toolBar
+                 withCustomView:(UIView *)customView
+                     delegate:(id)target;
 
 /**
  *  Set tab bar height

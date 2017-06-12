@@ -23,7 +23,10 @@
 
 #import "CarbonTabSwipeScrollView.h"
 
+@interface CarbonTabSwipeScrollView()
+@property (nonatomic,strong) UIView* customView;
 
+@end
 @implementation CarbonTabSwipeScrollView
 
 - (instancetype)initWithItems:(NSArray *)items {
@@ -33,16 +36,32 @@
     }
     return self;
 }
+- (instancetype)initWithItems:(NSArray *)items withCustomView:(UIView*)customView {
+    self = [self initWithCustomView:customView];
+    if (self) {
+        [self setItems:items];
+    }
+    return self;
+}
+
+- (instancetype)initWithCustomView:(UIView*)customView {
+    self = [self init];
+    if(self){
+        _customView = customView;
+    }
+    
+    return self;
+}
 
 - (instancetype)init {
     self = [super init];
     if (self) {
         // Disable scroll indicators
         self.showsHorizontalScrollIndicator = self.showsVerticalScrollIndicator = NO;
-
+        
         // Support RTL
         if ([UIApplication sharedApplication].userInterfaceLayoutDirection ==
-                UIUserInterfaceLayoutDirectionRightToLeft &&
+            UIUserInterfaceLayoutDirectionRightToLeft &&
             [self respondsToSelector:@selector(semanticContentAttribute)]) {
             self.semanticContentAttribute = UISemanticContentAttributeForceRightToLeft;
         }
@@ -55,27 +74,40 @@
     for (UIView *view in self.subviews) {
         [view removeFromSuperview];
     }
-
+    
     // Create Carbon segmented control
     _carbonSegmentedControl = [[CarbonTabSwipeSegmentedControl alloc] initWithItems:items];
     [self addSubview:_carbonSegmentedControl];
+    if(_customView){
+        [self addSubview:_customView];
+    }
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     if (_carbonSegmentedControl) {
         // Set segmented control height equal to scroll view height
         CGRect segmentRect = _carbonSegmentedControl.frame;
         segmentRect.size.height = CGRectGetHeight(self.frame);
         _carbonSegmentedControl.frame = segmentRect;
-
+        
         // Min content width equal to scroll view width
         CGFloat contentWidth = [_carbonSegmentedControl getWidth];
+        
+        if(_customView){
+            CGRect editButtonRect = _customView.frame;
+            editButtonRect.size.height = CGRectGetHeight(self.frame);
+            editButtonRect.origin.x = contentWidth;
+            editButtonRect.origin.y = segmentRect.origin.y;
+            _customView.frame = editButtonRect;
+            
+            contentWidth = contentWidth + _customView.frame.size.width;
+        }
+        
         if (contentWidth < CGRectGetWidth(self.frame)) {
             contentWidth = CGRectGetWidth(self.frame) + 1;
         }
-
         // Scroll view content size
         self.contentSize = CGSizeMake(contentWidth, CGRectGetHeight(self.frame));
     }
