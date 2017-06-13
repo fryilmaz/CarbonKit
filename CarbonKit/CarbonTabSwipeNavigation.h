@@ -179,10 +179,10 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return CarbonTabSwipeNavigation instance
  */
-- (instancetype)initWithItems:(NSArray *)items
-                      toolBar:(UIToolbar *)toolBar
-               withCustomView:(UIView *)customView
-                     delegate:(id)target;
+- (instancetype)initWithItems:(nullable NSArray *)items
+                      toolBar:(nonnull UIToolbar *)toolBar
+               withCustomView:(nonnull UIView *)customView
+                     delegate:(nonnull id)target;
 
 /**
  *  Set tab bar height
