@@ -37,19 +37,11 @@
     return self;
 }
 - (instancetype)initWithItems:(NSArray *)items withCustomView:(UIView*)customView {
-    self = [self initWithCustomView:customView];
+    self = [self init];
     if (self) {
         [self setItems:items];
-    }
-    return self;
-}
-
-- (instancetype)initWithCustomView:(UIView*)customView {
-    self = [self init];
-    if(self){
         _customView = customView;
     }
-    
     return self;
 }
 
