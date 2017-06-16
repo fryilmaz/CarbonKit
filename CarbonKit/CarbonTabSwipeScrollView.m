@@ -39,8 +39,8 @@
 - (instancetype)initWithItems:(NSArray *)items withCustomView:(UIView*)customView {
     self = [self init];
     if (self) {
-        [self setItems:items];
         _customView = customView;
+        [self setItems:items];
     }
     return self;
 }
