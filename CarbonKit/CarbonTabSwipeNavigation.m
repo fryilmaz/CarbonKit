@@ -210,8 +210,13 @@ UIPageViewControllerDataSource, UIScrollViewDelegate>
 
 - (void)syncIndicator {
     NSInteger index = self.carbonSegmentedControl.selectedSegmentIndex;
-    CGFloat selectedSegmentMinX = [self.carbonSegmentedControl getMinXForSegmentAtIndex:index];
-    CGFloat selectedSegmentWidth = [self.carbonSegmentedControl getWidthForSegmentAtIndex:index];
+    CGFloat selectedSegmentMinX = 0;
+    CGFloat selectedSegmentWidth = 0;
+    if(index >= 0){
+        selectedSegmentMinX = [self.carbonSegmentedControl getMinXForSegmentAtIndex:index];
+        selectedSegmentWidth = [self.carbonSegmentedControl getWidthForSegmentAtIndex:index];
+    }
+
     
     [self.carbonSegmentedControl setIndicatorMinX:selectedSegmentMinX];
     [self.carbonSegmentedControl setIndicatorWidth:selectedSegmentWidth];
