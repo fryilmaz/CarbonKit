@@ -29,6 +29,13 @@
 
 @implementation CarbonTabSwipeSegmentedControl
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    if([gestureRecognizer isKindOfClass:UITapGestureRecognizer.self]){
+        return false;
+    }
+    return true;
+}
+
 - (instancetype)initWithItems:(NSArray *)items {
     self = [super initWithItems:items];
     if (self) {
